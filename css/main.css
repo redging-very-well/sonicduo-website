@@ -1869,7 +1869,7 @@ body {
 }
 
 .default-header {
-  padding: 25px 0;
+  padding: 15px 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -1965,15 +1965,15 @@ nav a:hover {
 }
 
 .p1-gradient-bg, .primary-btn:after, .is-sticky .default-header, .single-img, .member-area .overlay-bg, .contact-area .primary-btn, .footer-social a:hover {
-  background-image: -moz-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
-  background-image: -webkit-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
-  background-image: -ms-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
+  background-image: -moz-linear-gradient(0deg, #661800 0%, #150600 100%);
+  background-image: -webkit-linear-gradient(0deg, #661800 0%, #150600 100%);
+  background-image: -ms-linear-gradient(0deg, #661800 0%, #150600 100%);
 }
 
 .p1-gradient-color, .about-details h2 {
-  background: -moz-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
-  background: -webkit-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
-  background: -ms-linear-gradient(0deg, #ff511c 0%, #3f1100 100%);
+  background: -moz-linear-gradient(0deg, #661800 0%, #150600 100%);
+  background: -webkit-linear-gradient(0deg, #661800 0%, #150600 100%);
+  background: -ms-linear-gradient(0deg, #661800 0%, #150600 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -2023,10 +2023,12 @@ nav a:hover {
 
 
 .pick {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   
-  background-color: #cecece;  
+  background: -moz-linear-gradient(175deg, #ffffff 0%, #6b6b6b 100%);
+  background: -webkit-linear-gradient(175deg, #ffffff 0%, #6b6b6b 100%);
+  background: -ms-linear-gradient(175deg, #ffffff 0%, #6b6b6b 100%);
 
   border: #000 1px solid;
   
@@ -2116,6 +2118,48 @@ nav a:hover {
   .banner-content p br {
     display: none;
   }
+}
+
+.audio-player-content {
+  display: inline-block;   
+  vertical-align: middle;
+}
+
+.audio-player-content button {
+  background: none; 
+  border: none; 
+  cursor: pointer;
+}
+
+.audio-player-content button img {
+  width: 60px;
+  height: 60px;
+  outline: none;
+}
+
+.audio-player-content button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.audio-player-content button img.pressed {
+  filter: brightness(2.0) saturate(2.0) contrast(1.2) drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+  transform: scale(0.90) translateY(2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18) inset;
+  transition: filter 0.5s, transform 0.5s, box-shadow 0.5s;
+}
+
+.audio-player-content input[type="range"] {
+  width: 200px;
+  height: 10px;
+  background: #ddd;
+  accent-color: #ddd;
+  outline: none;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 
 .quote-left h2 {

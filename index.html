@@ -69,6 +69,44 @@
 						<p class="text-uppercase mx-auto">
 							Music for any occasion
 						</p>
+						<p class="audio-player-content">
+							<button id="play-btn">
+								<img src="img/original/video-btn.png" alt="Play">
+							</button>
+							<audio id="audio-player" src="audio/sample-1.mp3"></audio>
+							<input type="range" id="audio-slider" value="0" min="0" max="330" step="1">
+
+							<script>
+								const audio = document.getElementById('audio-player');
+								const slider = document.getElementById('audio-slider');
+								const playButton = document.getElementById('play-btn');
+
+								audio.addEventListener('loadedmetadata', function() {
+									slider.max = Math.floor(audio.duration);
+								});
+
+								audio.addEventListener('timeupdate', function() {
+									slider.value = Math.floor(audio.currentTime);
+								});
+								audio.addEventListener('ended', function() {
+									slider.value = 0; // Reset slider when audio ends
+								});
+								slider.addEventListener('input', function() {
+									audio.currentTime = slider.value;
+								});
+								playButton.addEventListener('click', function() {
+									if (audio.paused) {
+										// set the playButton child image element to have the class "pressed"
+										playButton.children[0].classList.add('pressed');
+										audio.play();
+									} else {
+										audio.pause();
+										// remove the class "pressed" from the playButton
+										playButton.children[0].classList.remove('pressed');
+									}
+								});
+							</script>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -97,7 +135,7 @@
 						If you're after something a bit more bespoke, we also have a growing collection of our very own original compositions. 
 						You can often find us playing the open mic circuit honing our skills; a great way to come and see us play for free!<br>
 						<br>
-						We're available to play your next event; checkout out some of our clips below and get in touch with us today!
+						We're available to play your next event; check out some of our clips below and get in touch with us today!
 
 					</p>
 				</div>
