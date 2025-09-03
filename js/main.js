@@ -15,7 +15,7 @@ $(document).ready(function(){
  //-------- Active Sticky Js ----------//
      $(".default-header").sticky({topSpacing:0});
 
-     
+
      // -------   Active Mobile Menu-----//
 
     $(".menu-bar").on('click', function(e){
@@ -34,8 +34,8 @@ $('a[href*="#"]')
   .click(function(event) {
     // On-page links
     if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
       location.hostname == this.hostname
     ) {
       // Figure out element to scroll to
@@ -99,36 +99,54 @@ $('a[href*="#"]')
     // -------   Mail Send ajax
 
      $(document).ready(function() {
-        var form = $('#myForm'); // contact form
-        var submit = $('.submit-btn'); // submit button
-        var alert = $('.alert-msg'); // alert div for show alert message
 
-        // form submit event
-        form.on('submit', function(e) {
-            e.preventDefault(); // prevent default form submit
+      const form = document.getElementById('contact-form');
+      const submitBtn = $("#submit-btn")
+      const submitText = $("#submit-btn-text")
+      const alert = $('#alert-msg'); // alert div for show alert message
 
-            $.ajax({
-                url: 'mail.php', // form action url
-                type: 'POST', // form submit method get/post
-                dataType: 'html', // request type html/json/xml
-                data: form.serialize(), // serialize form data
-                beforeSend: function() {
-                    alert.fadeOut();
-                    submit.html('Sending....'); // change submit button text
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+        alert.fadeOut();
+        const originalSubmitText = submitText.text();
+        submitText.text('Sending....'); // change submit button text
+        submitBtn.prop('disabled', true);
+
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
-                success: function(data) {
-                    alert.html(data).fadeIn(); // fade in response data
-                    form.trigger('reset'); // reset form
-                    submit.attr("style", "display: none !important");; // reset submit button text
-                },
-                error: function(e) {
-                    console.log(e)
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                  alert.html("Form submitted successfully").fadeIn();
+                } else {
+                    console.log(response);
+                    alert.html(json.message).fadeIn();
                 }
-            });
+            })
+            .catch(error => {
+                console.log(error);
+                alert.html("Something went wrong!").fadeIn();
+            })
+            .then(function() {
+              form.reset();
+              submitText.text(originalSubmitText);
+              submitBtn.prop('disabled', false);
+              setTimeout(() => {
+                alert.fadeOut();
+              }, 10000);
         });
+      });
+
     });
-
-
 
 
  });

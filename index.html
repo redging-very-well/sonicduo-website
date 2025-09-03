@@ -5,7 +5,7 @@
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/original/fav.png">
+	<!-- <link rel="shortcut icon" href="img/original/fav.png"> -->
 	<!-- Author Meta -->
 	<meta name="author" content="Sonic Duo">
 	<!-- Meta Description -->
@@ -71,7 +71,7 @@
 						</p>
 						<p class="audio-player-content">
 							<button id="play-btn">
-								<img src="img/original/video-btn.png" alt="Play">
+								<img src="img/video-play-btn.png" alt="Play">
 							</button>
 							<audio id="audio-player" src="audio/sample-1.mp3"></audio>
 							<input type="range" id="audio-slider" value="0" min="0" max="330" step="1">
@@ -98,9 +98,11 @@
 									if (audio.paused) {
 										// set the playButton child image element to have the class "pressed"
 										playButton.children[0].classList.add('pressed');
+										playButton.children[0].src = playButton.children[0].src = 'img/video-pause-btn.png';
 										audio.play();
 									} else {
 										audio.pause();
+										playButton.children[0].src = playButton.children[0].src = 'img/video-play-btn.png';
 										// remove the class "pressed" from the playButton
 										playButton.children[0].classList.remove('pressed');
 									}
@@ -173,7 +175,7 @@
 					<img src="img/f4.jpg" class="image img-fluid">
 					<div class="middle">
 						<!-- <a href="https://www.youtube.com/watch?v=L3V7LKYPIUQ" class="play-btn">
-							<img class="vdo-icon" src="img/original/video-btn.png" alt="">
+							<img class="vdo-icon" src="img/video-play-btn.png" alt="">
 						</a> -->
 						<h2 class="text-uppercase text-white">Serious business!</h2>
 						<!-- <p></p> -->
@@ -183,7 +185,7 @@
 					<img src="img/f5.jpg" class="image img-fluid">
 					<div class="middle">
 						<!-- <a href="https://www.youtube.com/watch?v=L3V7LKYPIUQ" class="play-btn">
-							<img class="vdo-icon" src="img/original/video-btn.png" alt="">
+							<img class="vdo-icon" src="img/video-play-btn.png" alt="">
 						</a> -->
 						<h2 class="text-uppercase text-white">WinWin Ponsonby</h2>
 						<p>Wednesday Warmer</p>
@@ -325,7 +327,9 @@
 					</h2>
 				</div>
 				<div class="col-lg-8">
-					<form id="myForm" action="mail.php" method="post" class="contact-form">
+					<form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+					    <input type="hidden" name="access_key" value="79c8cc3b-1931-4842-9e79-098a278230dc">
+
 						<div class="row justify-content-center">
 							<div class="col-lg-6">
 								<input name="fname" placeholder="Name" onfocus="this.placeholder = ''"
@@ -333,7 +337,7 @@
 									type="text">
 
 								<input name="email" placeholder="Email address"
-									pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+									pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'"
 									class="common-input mt-20" required="" type="email">
 
@@ -346,10 +350,10 @@
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
 									required=""></textarea>
 
-								<button class="primary-btn d-inline-flex align-items-center mt-20"><span
-										class="mr-10">Send Message</span><span
+								<button class="primary-btn d-inline-flex align-items-center mt-20" id="submit-btn"><span
+										class="mr-10" id="submit-btn-text">Send Message</span><span
 										class="lnr lnr-arrow-right"></span></button> <br>
-								<div class="alert-msg"></div>
+								<div class="alert-msg" id="alert-msg"></div>
 							</div>
 						</div>
 					</form>
